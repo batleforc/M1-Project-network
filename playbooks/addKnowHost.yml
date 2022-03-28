@@ -2,7 +2,7 @@
   hosts: localhost
   connection: local
   tasks:
-    - command: "ssh keyscan {{ item }}"
+    - command: "ssh-keyscan {{ item }}"
       with_items:
         - "{{ssh_hosts}}"
       register: known_host_keys
