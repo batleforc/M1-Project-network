@@ -20,7 +20,7 @@
         owner: tpuser
         group: tpuser
         mode: 0600
-        remote_src: yes
+        remote_src: false
 - hosts: "cyclope"
   name: "Copy configuration server to Cyclope"
   tasks:
@@ -30,7 +30,7 @@
         owner: tpuser
         group: tpuser
         mode: 0600
-        remote_src: yes
+        remote_src: false
     - name: Start Service
       command: "sudo systemctl enable openvpn@server.service"
 - hosts: "peaurouge"
@@ -42,7 +42,7 @@
         owner: tpuser
         group: tpuser
         mode: 0600
-        remote_src: yes
+        remote_src: false
     - name: Start Service OpenVPN
       command: "sudo systemctl enable openvpn@client.service"
 - hosts: "cyclope"
