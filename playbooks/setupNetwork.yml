@@ -23,7 +23,7 @@
       command: "sudo ip link set enp9s0 up"
       ignore_errors: true
     - name: LinkPeauRougeCyclope
-      command: "sudo ip route add 10.8.1.1 via 10.8.0.2"
+      command: "sudo ip route add 10.8.1.1 via 10.8.0.2 dev enp9s0"
       ignore_errors: true
 - hosts: "cyclope"
   become: true
@@ -35,5 +35,5 @@
       command: "sudo ip link set enp10s0 up"
       ignore_errors: true
     - name: LinkPeauRougeCyclope
-      command: "sudo ip route add 10.8.0.1 via 10.8.1.2"
+      command: "sudo ip route add 10.8.0.1 via 10.8.1.2 dev enp10s0"
       ignore_errors: true
