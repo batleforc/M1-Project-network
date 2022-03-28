@@ -9,7 +9,7 @@
       tags:
         - "ssh"
     - name: "Add ssh keys to know hosts"
-      know_hosts:
+      known_hosts:
         name: "{{item.item}}"
         key: "{{item.stdout}}"
         path: ~/.ssh/known_hosts
