@@ -5,10 +5,13 @@
   tasks:
     - name: "add Aaron"
       command: "sudo route add 192.168.122.108 gw 10.192.12.7"
+      ignore_errors: true
     - name: "add PeauRouge"
       command: "sudo route add 192.168.122.114 gw 10.192.12.7"
+      ignore_errors: true
     - name: "add Cyclope"
       command: "sudo route add 192.168.122.128 gw 10.192.12.7"
+      ignore_errors: true
     - name: "Install sshpass"
       apt:
         pkg:
