@@ -37,7 +37,7 @@
   become: true
   tasks:
     - ansible.builtin.copy:
-        src: Vpn/Server.conf
+        src: ../Vpn/Server.conf
         dest: /etc/openvpn/server.conf
         owner: tpuser
         group: tpuser
@@ -50,7 +50,7 @@
   become: true
   tasks:
     - ansible.builtin.copy:
-        src: Vpn/Client.conf
+        src: ../Vpn/Client.conf
         dest: /etc/openvpn/client.conf
         owner: tpuser
         group: tpuser
