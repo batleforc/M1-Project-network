@@ -1,0 +1,16 @@
+- name: "Add KnowHost"
+  hosts: localhost
+  connection: local
+  tasks:
+    - command: "ssh keyscan {{ item }}"
+      with_items:
+        - "{{tp}}"
+      register: known_host_keys
+      tags:
+        - "ssh"
+    - name: "Add ssh keys to know hosts"
+      know_hosts:
+        name: "{{item.item}}"
+        key: "{{item.stdout}}"
+        path: ~/.ssh/known_hosts
+      with_items: "{{ known_host_keys.results }}"
