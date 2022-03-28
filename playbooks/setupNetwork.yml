@@ -1,6 +1,9 @@
 - hosts: "aaron"
   become: true
   tasks:
+    - name: Rename
+      command: "sudo hostname -s aaron"
+      ignore_errors: true
     - name: addP1
       command: "sudo ip a add 10.8.0.2/24 dev enp9s0"
       ignore_errors: true
@@ -16,6 +19,9 @@
 - hosts: "peaurouge"
   become: true
   tasks:
+    - name: Rename
+      command: "sudo hostname -s peaurouge"
+      ignore_errors: true
     - name: addP1
       command: "sudo ip a add 10.8.0.1/24 dev enp9s0"
       ignore_errors: true
@@ -28,6 +34,9 @@
 - hosts: "cyclope"
   become: true
   tasks:
+    - name: Rename
+      command: "sudo hostname -s cyclope"
+      ignore_errors: true
     - name: addP2
       command: "sudo ip a add 10.8.1.1/24 dev enp10s0"
       ignore_errors: true
