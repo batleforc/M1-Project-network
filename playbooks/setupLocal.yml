@@ -12,7 +12,8 @@
     - name: "add Cyclope"
       command: "sudo route add 192.168.122.128 gw 10.192.12.7"
       ignore_errors: true
-    - name: "Install sshpass"
+    - name: "Install sshpass and OpenVpn"
+      become: true
       apt:
         pkg:
           - sshpass
