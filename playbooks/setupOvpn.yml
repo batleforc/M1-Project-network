@@ -23,6 +23,7 @@
         mode: 0600
 - hosts: "VPN"
   name: "Copy certificate to PeauRouge and Cyclope"
+  become: true
   tasks:
     - ansible.builtin.copy:
         src: /etc/openvpn/ta.key
@@ -33,6 +34,7 @@
         remote_src: false
 - hosts: "cyclope"
   name: "Copy configuration server to Cyclope"
+  become: true
   tasks:
     - ansible.builtin.copy:
         src: ../Vpn/Server.conf
@@ -45,6 +47,7 @@
       command: "sudo systemctl enable openvpn@server.service"
 - hosts: "peaurouge"
   name: "Copy configuration server to PeauRouge"
+  become: true
   tasks:
     - ansible.builtin.copy:
         src: ../Vpn/Client.conf
