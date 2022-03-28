@@ -1,0 +1,67 @@
+@startuml Glob
+actor Daisy
+actor Picsou
+folder System{
+  node PeauRouge {
+    node https
+    node OvpnTunnel
+    node Backend
+    cloud notePeauRouge #YellowGreen[
+      VM1
+      Web Service
+      bastion
+    ]
+  }
+  node Aaron{
+    node Router
+    node PKI
+    node IntegrityChecker
+    cloud noteAaron #YellowGreen[
+      VM2
+      Hidden router
+      PKI
+      Intégrity checker for DB
+    ]
+  }
+  node Cyclope{
+    node DB
+    node OvpnTunnel2
+    cloud noteCyclop #YellowGreen[
+      VM3
+      BDD
+      Diplome Checker
+    ]
+  }
+  note "LZO + Certificate on AARON" as vpn
+}
+
+note "192." as noteDaisy
+Daisy .. noteDaisy
+Picsou == System : Admin
+
+
+
+
+vpn .. OvpnTunnel
+vpn .. OvpnTunnel2
+
+
+Daisy <--> https
+
+PeauRouge <-[#Black]-> Router : Bridge to cyclope [BLUE]
+Router <-[#Black]-> Cyclope : Bridge to PeauRouge [BLUE]
+
+IntegrityChecker <--> DB : Minute check
+
+OvpnTunnel <.[#Blue]..> OvpnTunnel2 : Secured Link through Router
+
+PKI -[#Green]-> https : SSL
+
+PKI -[#Green]-> OvpnTunnel : Certificate
+PKI -[#Green]-> OvpnTunnel2 : Certificate
+
+https <--> Backend
+
+Backend <..[#Blue].> DB : Validate Degree through Router
+
+@enduml

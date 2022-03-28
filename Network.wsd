@@ -1,0 +1,37 @@
+@startuml net
+!include <office/Servers/application_server>
+!include <office/Servers/database_server>
+nwdiag {
+  network VmWare{
+    address = "192.X.X.X"
+
+    Daisy[description = "<&person*4.5>\n Daisy"];
+    Picsou[description = "<&person*4.5>\n Picsou"];
+    group boa{
+      color = "palegreen"
+      Boa [address = "10.192.12.7", shape="cloud"]
+    }
+  }
+  network Boa {
+      address = "192.168.122.x/24"
+      color = "palegreen"
+
+      PeauRouge [address = "192.168.122.114:enp1s0",description = "<$application_server>\n PeauRouge"];
+      Aaron [address = "192.168.122.108:enp1s0", shape= cloud];
+      Cyclope [address = "192.168.122.128:enp1s0", description = "<$database_server>\n Cyclope"];
+  }
+  network P1 {
+      address = "10.8.0.x/24"
+
+      PeauRouge [address = "10.8.0.1:enp9s0"];
+      Aaron [address = "10.8.0.2:enp9s0"];
+  }
+  network P2 {
+      address = "10.8.1.x/24"
+
+      Cyclope [address = "10.8.1.1:enp10s0"];
+      Aaron [address = "10.8.1.2:enp10s0"];
+  }
+}
+
+@enduml
