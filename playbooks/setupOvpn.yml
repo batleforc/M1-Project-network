@@ -5,7 +5,6 @@
     - name: apt
       apt:
         update_cache: yes
-        upgrade: "yes"
         name: "openvpn"
 - hosts: localhost
   name: "Generate OpenVpn certificate"
