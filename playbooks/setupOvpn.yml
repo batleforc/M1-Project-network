@@ -12,12 +12,11 @@
     - name: "Generate OpenVpn certificate"
       shell: "sudo openvpn --genkey --secret /etc/openvpn/ta.key"
 - hosts: localhost
-  name: Change ownershop of /etc/openvpn/ta.key
+  name: Change ownership of /etc/openvpn/ta.key
   tasks:
-    - name: "Change ownershop of /etc/openvpn/ta.key"
+    - name: "Change ownership of /etc/openvpn/ta.key"
       file:
         path: /etc/openvpn/ta.key
-        state: directory
         owner: tpuser
         group: tpuser
         mode: 0600
