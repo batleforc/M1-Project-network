@@ -1,4 +1,4 @@
-- hosts: "*"
+- hosts: "TP"
   become: true
   tasks:
     - name: apt

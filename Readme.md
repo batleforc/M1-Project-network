@@ -9,5 +9,5 @@ sudo apt install ansible sshpass -y
 ## Ansible
 
 ```shell
-ansible-playbook -i inventory/hosts playbooks/update.yml
+ansible-playbook -i inventory/hosts.yml playbooks/update.yml
 ```
