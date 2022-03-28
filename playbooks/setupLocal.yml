@@ -1,0 +1,10 @@
+- name: "Setup Localhost"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: "add Aaron"
+      command: "sudo route add 192.168.122.108 gw 10.192.12.7"
+    - name: "add PeauRouge"
+      command: "sudo route add 192.168.122.114 gw 10.192.12.7"
+    - name: "add Cyclope"
+      command: "sudo route add 192.168.122.128 gw 10.192.12.7"
