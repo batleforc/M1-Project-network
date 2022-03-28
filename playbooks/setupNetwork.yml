@@ -2,16 +2,16 @@
   become: true
   tasks:
     - name: addP1
-      command: "sudo ip a add 10.8.0.2/24 dev enp9s0&&sudo ip link set enp9s0 up"
+      command: "sudo ip a add 10.8.0.2/24 dev enp9s0 && sudo ip link set enp9s0 up"
     - name: addP2
-      command: "sudo ip a add 10.8.1.2/24 dev enp10s0&&sudo ip link set enp10s0 up"
+      command: "sudo ip a add 10.8.1.2/24 dev enp10s0 && sudo ip link set enp10s0 up"
 - hosts: "peaurouge"
   become: true
   tasks:
     - name: addP1
-      command: "sudo ip a add 10.8.0.1/24 dev enp9s0&&sudo ip link set enp9s0 up"
+      command: "sudo ip a add 10.8.0.1/24 dev enp9s0 && sudo ip link set enp9s0 up"
 - hosts: "cyclope"
   become: true
   tasks:
     - name: addP2
-      command: "sudo ip a add 10.8.1.1/24 dev enp10s0&&sudo ip link set enp10s0 up"
+      command: "sudo ip a add 10.8.1.1/24 dev enp10s0 && sudo ip link set enp10s0 up"
