@@ -3,7 +3,7 @@
 ## Needed
 
 ```shell
-sudo apt install ansible sshpass -y
+sudo apt install ansible -y
 ```
 
 ## Ansible
