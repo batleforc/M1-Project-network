@@ -35,7 +35,7 @@ folder System{
   note "LZO + Certificate on AARON" as vpn
 }
 
-note "192." as noteDaisy
+note "10.192." as noteDaisy
 Daisy .. noteDaisy
 Picsou == System : Admin
 

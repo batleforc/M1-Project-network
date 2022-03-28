@@ -3,7 +3,7 @@
 !include <office/Servers/database_server>
 nwdiag {
   network VmWare{
-    address = "192.X.X.X"
+    address = "10.192.X.X"
 
     Daisy[description = "<&person*4.5>\n Daisy"];
     Picsou[description = "<&person*4.5>\n Picsou"];
@@ -31,6 +31,13 @@ nwdiag {
 
       Cyclope [address = "10.8.1.1:enp10s0"];
       Aaron [address = "10.8.1.2:enp10s0"];
+  }
+  network VPN{
+    address = "10.8.3.x/24"
+    color = "Cyan"
+
+    Cyclope [address = "10.8.3.1"];
+    PeauRouge [address = "10.8.3.2"];
   }
 }
 
