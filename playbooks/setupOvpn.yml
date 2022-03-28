@@ -13,6 +13,7 @@
       shell: "sudo openvpn --genkey --secret /etc/openvpn/ta.key"
 - hosts: localhost
   name: Change ownership of /etc/openvpn/ta.key
+  become: true
   tasks:
     - name: "Change ownership of /etc/openvpn/ta.key"
       file:
