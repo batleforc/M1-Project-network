@@ -1,4 +1,4 @@
-- hosts: "TP"
+- hosts: "VPN"
   name: "Install OpenVPN sur les VM"
   become: true
   tasks:
@@ -10,19 +10,19 @@
   name: "Generate OpenVpn certificate"
   tasks:
     - name: "Generate OpenVpn certificate"
-      shell: "sudo openvpn --genkey --secret /etc/openvpn/keys/ta.key"
+      shell: "sudo openvpn --genkey --secret /etc/openvpn/ta.key"
 - hosts: "VPN"
   name: "Copy certificate to PeauRouge and Cyclope"
   tasks:
     - ansible.builtin.copy:
-        src: /etc/openvpn/keys/ta.key
-        dest: /etc/openvpn/keys/ta.key
+        src: /etc/openvpn/ta.key
+        dest: /etc/openvpn/ta.key
         owner: tpuser
         group: tpuser
         mode: 0600
         remote_src: yes
         remote_dest: yes
-        creates: /etc/openvpn/keys/ta.key
+        creates: /etc/openvpn/ta.key
 - hosts: "cyclope"
   name: "Copy configuration server to Cyclope"
   tasks:
