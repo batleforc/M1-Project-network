@@ -1,0 +1,68 @@
+- hosts: "TP"
+  name: "Install OpenVPN sur les VM"
+  become: true
+  tasks:
+    - name: apt
+      apt:
+        update_cache: yes
+        upgrade: "yes"
+        name: "openvpn"
+- hosts: localhost
+  name: "Generate OpenVpn certificate"
+  tasks:
+    - name: "Generate OpenVpn certificate"
+      shell: "sudo openvpn --genkey --secret /etc/openvpn/keys/ta.key"
+- hosts: "VPN"
+  name: "Copy certificate to PeauRouge and Cyclope"
+  tasks:
+    - ansible.builtin.copy:
+        src: /etc/openvpn/keys/ta.key
+        dest: /etc/openvpn/keys/ta.key
+        owner: tpuser
+        group: tpuser
+        mode: 0600
+        remote_src: yes
+        remote_dest: yes
+        creates: /etc/openvpn/keys/ta.key
+- hosts: "cyclope"
+  name: "Copy configuration server to Cyclope"
+  tasks:
+    - ansible.builtin.copy:
+        src: ../Vpn/Server.conf
+        dest: /etc/openvpn/server.conf
+        owner: tpuser
+        group: tpuser
+        mode: 0600
+        remote_src: yes
+        remote_dest: yes
+        creates: /etc/openvpn/server.conf
+    - name: Start Service
+      command: "sudo systemctl enable openvpn@server.service"
+- hosts: "peaurouge"
+  name: "Copy configuration server to PeauRouge"
+  tasks:
+    - ansible.builtin.copy:
+        src: ../Vpn/Client.conf
+        dest: /etc/openvpn/client.conf
+        owner: tpuser
+        group: tpuser
+        mode: 0600
+        remote_src: yes
+        remote_dest: yes
+        creates: /etc/openvpn/client.conf
+    - name: Start Service OpenVPN
+      command: "sudo systemctl enable openvpn@client.service"
+- hosts: "cyclope"
+  name: "Ping PeauRouge"
+  tasks:
+    - name: Ping PeauRouge
+      ping:
+        host: 10.8.3.2
+        count: 4
+- hosts: "PeauRouge"
+  name: "Ping cyclope"
+  tasks:
+    - name: Ping cyclope
+      ping:
+        host: 10.8.3.1
+        count: 4

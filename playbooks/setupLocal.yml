@@ -14,3 +14,8 @@
         name: "sshpass"
         update_cache: yes
         upgrade: "yes"
+    - name: "Install Ovpn"
+      apt:
+        name: "openvpn"
+        update_cache: yes
+        upgrade: "yes"
