@@ -43,10 +43,12 @@
         group: tpuser
         mode: 0640
         remote_src: false
-    - name: Start Service
+    - name: Enable Service OpenVPN
       command: "sudo systemctl enable openvpn@server.service"
+    - name: Start Service OpenVPN
+      command: "sudo systemctl start openvpn@server.service"
 - hosts: "peaurouge"
-  name: "Copy configuration server to PeauRouge"
+  name: "Copy configuration Client to PeauRouge"
   become: true
   tasks:
     - ansible.builtin.copy:
@@ -56,19 +58,7 @@
         group: tpuser
         mode: 0640
         remote_src: false
-    - name: Start Service OpenVPN
+    - name: Enable Service OpenVPN
       command: "sudo systemctl enable openvpn@client.service"
-- hosts: "cyclope"
-  name: "Ping PeauRouge"
-  tasks:
-    - name: Ping PeauRouge
-      ping:
-        host: 10.8.3.2
-        count: 4
-- hosts: "PeauRouge"
-  name: "Ping cyclope"
-  tasks:
-    - name: Ping cyclope
-      ping:
-        host: 10.8.3.1
-        count: 4
+    - name: Start Service OpenVPN
+      command: "sudo systemctl start openvpn@client.service"
