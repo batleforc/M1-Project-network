@@ -11,11 +11,7 @@
       command: "sudo route add 192.168.122.128 gw 10.192.12.7"
     - name: "Install sshpass"
       apt:
-        name: "sshpass"
+        pkg:
+          - sshpass
+          - openvpn
         update_cache: yes
-        upgrade: "yes"
-    - name: "Install Ovpn"
-      apt:
-        name: "openvpn"
-        update_cache: yes
-        upgrade: "yes"
