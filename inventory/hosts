@@ -1,0 +1,4 @@
+[tp]
+aaron ansible_host=192.168.122.108 ansible_user=tpuser ansible_password=tpuser
+peaurouge ansible_host=192.168.122.114 ansible_user=tpuser ansible_password=tpuser
+cyclope ansible_host=192.168.122.128 ansible_user=tpuser ansible_password=tpuser

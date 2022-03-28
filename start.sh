@@ -1,0 +1,1 @@
+docker run -it --rm --volume ${PWD}:/ansible -v ${HOME}\.ssh:/ssh -w /ansible quay.io/ansible/ansible-runner bash
