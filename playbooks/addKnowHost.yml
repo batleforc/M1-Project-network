@@ -4,7 +4,7 @@
   tasks:
     - command: "ssh keyscan {{ item }}"
       with_items:
-        - "{{tp}}"
+        - "{{ssh_hosts}}"
       register: known_host_keys
       tags:
         - "ssh"
