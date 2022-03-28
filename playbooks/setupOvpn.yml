@@ -21,8 +21,6 @@
         group: tpuser
         mode: 0600
         remote_src: yes
-        remote_dest: yes
-        creates: /etc/openvpn/ta.key
 - hosts: "cyclope"
   name: "Copy configuration server to Cyclope"
   tasks:
@@ -33,8 +31,6 @@
         group: tpuser
         mode: 0600
         remote_src: yes
-        remote_dest: yes
-        creates: /etc/openvpn/server.conf
     - name: Start Service
       command: "sudo systemctl enable openvpn@server.service"
 - hosts: "peaurouge"
@@ -47,8 +43,6 @@
         group: tpuser
         mode: 0600
         remote_src: yes
-        remote_dest: yes
-        creates: /etc/openvpn/client.conf
     - name: Start Service OpenVPN
       command: "sudo systemctl enable openvpn@client.service"
 - hosts: "cyclope"
