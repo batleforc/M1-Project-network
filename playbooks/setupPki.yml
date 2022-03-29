@@ -1,0 +1,58 @@
+- hosts: "aaron"
+  become: true
+  name: "Init pki infra"
+  tasks:
+    - name: "Create Pki directory"
+      file:
+        path: /root/pki
+        state: directory
+    - name: "Create pki configuration directory"
+      file:
+        path: /root/pki/config
+        state: directory
+    - name: "Create pki Certificates directory"
+      file:
+        path: /root/pki/certificats
+        state: directory
+    - name: "Create pki db"
+      file:
+        path: /root/pki/db/ca.db.certs
+        state: directory
+    - name: "Init pki Db"
+      shell: "echo'01'> /root/pki/db/ca.db.serial"
+    - name: "Init cert index"
+      shell: "cp /dev/null /root/pki/db/ca.db.index"
+    - name: "Copy ca.config in config from host"
+      ansible.builtin.copy:
+        src: ../Pki/ca.config
+        dest: /root/pki/config/ca.config
+        mode: 0640
+        remote_src: false
+- hosts: "aaron"
+  become: true
+  name: "Generate CA"
+  tasks:
+    - name: "Generate ca.key"
+      shell: "cd /root/pki && openssl genrsa -out certficats/ca.key 4096 -config config/ca.config"
+    - name: "Generate ca.req in certificats"
+      shell: "cd /root/pki && openssl req -new -key certficats/ca.key -out certficats/ca.req -config config/ca.config"
+    - name: "Generate ca.crt in certificats"
+      shell: "cd /root/pki && openssl ca -batch -config config/ca.config -days 3650 -notext -md sha256 -in certficats/ca.req -out certficats/ca.crt"
+    - name: "Generate ca.der in certificats"
+      shell: "cd /root/pki && openssl x509 -in certficats/ca.crt -out certficats/ca.der -outform DER"
+- hosts: "aaron"
+  become: true
+  name: "Generate Client"
+  tasks:
+    - name: "Copy Client.config in config from host"
+      ansible.builtin.copy:
+        src: ../Pki/Client.config
+        dest: /root/pki/config/client.config
+        mode: 0640
+        remote_src: false
+    - name: "Generate key in certificats"
+      shell: "cd /root/pki && openssl genrsa -out certficats/client.key -config config/client.config"
+    - name: "Generate key csr in certificats"
+      shell: "cd /root/pki && openssl req -new -key certficats/client.key -out certficats/client.csr -config config/client.config"
+    - name: "Sign csr in certificats"
+      shell: "cd /root/pki && openssl ca -batch -config config/ca.config -days 3650 -notext -md sha256 -in certficats/client.csr -out certficats/client.crt"
