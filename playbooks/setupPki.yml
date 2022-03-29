@@ -51,7 +51,7 @@
         mode: 0640
         remote_src: false
     - name: "Generate key in certificats"
-      shell: "cd /root/pki && openssl genrsa -out certificats/client.key -config config/client.config"
+      shell: "cd /root/pki && openssl genrsa -out certificats/client.key"
     - name: "Generate key csr in certificats"
       shell: "cd /root/pki && openssl req -new -key certificats/client.key -out certificats/client.csr -config config/client.config"
     - name: "Sign csr in certificats"
