@@ -33,7 +33,7 @@
   name: "Generate CA"
   tasks:
     - name: "Generate ca.key"
-      shell: "cd /root/pki && openssl genrsa -out certficats/ca.key 4096 -config config/ca.config"
+      shell: "cd /root/pki && openssl genrsa -out certficats/ca.key"
     - name: "Generate ca.req in certificats"
       shell: "cd /root/pki && openssl req -new -key certficats/ca.key -out certficats/ca.req -config config/ca.config"
     - name: "Generate ca.crt in certificats"
