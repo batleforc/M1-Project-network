@@ -2,6 +2,10 @@
   hosts: localhost
   connection: local
   tasks:
+    - name: "Create .ssh if not exist"
+      file:
+        path: ~/.ssh
+        state: directory
     - name: "create knowHost if not exit"
       copy:
         content: ""
