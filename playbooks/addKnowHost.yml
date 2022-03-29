@@ -2,6 +2,11 @@
   hosts: localhost
   connection: local
   tasks:
+    - name: "create knowHost if not exit"
+      copy:
+        content: ""
+        dest: "~/.ssh/known_hosts"
+        force: no
     - command: "ssh-keyscan {{ item }}"
       with_items:
         - "{{ssh_hosts}}"
