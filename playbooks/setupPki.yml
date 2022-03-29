@@ -19,7 +19,7 @@
         path: /root/pki/db/ca.db.certs
         state: directory
     - name: "Init pki Db"
-      shell: "echo'01'> /root/pki/db/ca.db.serial"
+      shell: "echo '01'> /root/pki/db/ca.db.serial"
     - name: "Init cert index"
       shell: "cp /dev/null /root/pki/db/ca.db.index"
     - name: "Copy ca.config in config from host"
