@@ -37,7 +37,7 @@
     - name: "Generate ca.req in certificats"
       shell: "cd /root/pki && sudo openssl req -new -key certificats/ca.key -out certificats/ca.req -config config/ca.config"
     - name: "Generate ca.crt in certificats"
-      shell: "cd /root/pki && sudo openssl x509 -req -days 3000 -in certificats/ca.req -signkey certificats/ca.key -out certificats/ca.crt -config config/ca.config"
+      shell: "cd /root/pki && sudo openssl x509 -req -days 3000 -in certificats/ca.req -signkey certificats/ca.key -out certificats/ca.crt"
     - name: "Generate ca.der in certificats"
       shell: "cd /root/pki && sudo openssl x509 -in certificats/ca.crt -out certificats/ca.der -outform DER"
 - hosts: "aaron"
