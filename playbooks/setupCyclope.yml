@@ -1,5 +1,6 @@
 - hosts: "cyclope"
   name: "Setup Cyclope Redis"
+  become: true
   tasks:
     - name: "Install Redis"
       apt:
