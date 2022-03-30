@@ -51,18 +51,18 @@
         name: sftp_users
     - name: "Create sftp user"
       user:
-        name: {{ sftp_user }}
+        name: "{{ sftp_user }}"
         group: sftp_users
         home: /usr/local/network
         shell: /bin/nologin
-        password: {{ sftp_password }}
+        password: "{{ sftp_password }}"
     - name: "Set sftp user password"
       command: "echo {{ sftp_password }} | passwd --stdin {{ sftp_user }}"
     - name: "Create Cyclope App Folder"
       file:
         path: /usr/local/network
         state: directory
-        owner: {{ sftp_user }}
+        owner: "{{ sftp_user }}"
         group: sftp_users
         mode: 0701
     - name: "Add sftp config to /etc/ssh/sshd_config"
