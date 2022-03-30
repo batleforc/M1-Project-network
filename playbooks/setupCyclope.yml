@@ -43,3 +43,63 @@
         backup: yes
     - name: "Restart redis"
       shell: sudo systemctl restart redis.service
+- hosts: "cyclope"
+  name: "Setup SFTP"
+  tasks:
+    - name: "Create sftp group"
+      group:
+        name: sftp_users
+    - name: "Create sftp user"
+      user:
+        name: {{ sftp_user }}
+        group: sftp_users
+        home: /usr/local/network
+        shell: /bin/nologin
+        password: {{ sftp_password }}
+    - name: "Set sftp user password"
+      command: "echo {{ sftp_password }} | passwd --stdin {{ sftp_user }}"
+    - name: "Create Cyclope App Folder"
+      file:
+        path: /usr/local/network
+        state: directory
+        owner: {{ sftp_user }}
+        group: sftp_users
+        mode: 0701
+    - name: "Add sftp config to /etc/ssh/sshd_config"
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: "Match group sftp_users"
+        line: Match group sftp_users
+        state: present
+        backup: yes
+    - name: "Add Chroot config to /etc/ssh/sshd_config"
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        insertafter: Match group sftp_users
+        regexp: "ChrootDirectory /usr/local/network"
+        line: ChrootDirectory /usr/local/network
+        state: present
+        backup: yes
+    - name: "Add no x11Forward config to /etc/ssh/sshd_config"
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        insertafter: ChrootDirectory /usr/local/network
+        line: x11Forwarding no
+        state: present
+        backup: yes
+    - name: "Add no tcpforwarding config to /etc/ssh/sshd_config"
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        insertafter: x11Forwarding no
+        line: AllowTcpForwarding no
+        state: present
+        backup: yes
+    - name: "Add force command config to /etc/ssh/sshd_config"
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        insertafter: AllowTcpForwarding no
+        line: ForceCommand internal-sftp
+        state: present
+        backup: yes
+    - name: "Restart ssh"
+      shell: sudo systemctl restart ssh.service
