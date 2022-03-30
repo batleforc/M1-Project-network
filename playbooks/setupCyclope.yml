@@ -82,7 +82,7 @@
     - name: "Add no x11Forward config to /etc/ssh/sshd_config"
       lineinfile:
         path: /etc/ssh/sshd_config
-        insertafter: ChrootDirectory %h
+        insertafter: ChrootDirectory /usr/local/
         line: x11Forwarding no
         state: present
         backup: yes
