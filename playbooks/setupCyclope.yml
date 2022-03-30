@@ -1,5 +1,5 @@
 - hosts: "cyclope"
-  name: "Setup Cyclope Redis"
+  name: "Setup Redis"
   become: true
   tasks:
     - name: "Install Redis"
