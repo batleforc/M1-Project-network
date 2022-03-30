@@ -18,3 +18,29 @@
     - name: "Install Ovpn"
       apt:
         name: "openvpn"
+- name: "Add Host"
+  hosts: localhost
+  connection: local
+  become: true
+  tasks:
+    - name: "Add Aaron to host"
+      ignore_errors: true
+      lineinfile:
+        path: /etc/hosts
+        line: 192.168.122.108 aaron.local
+        state: present
+        backup: yes
+    - name: "Add cyclope to host"
+      ignore_errors: true
+      lineinfile:
+        path: /etc/hosts
+        line: 192.168.122.128 cyclope.local
+        state: present
+        backup: yes
+    - name: "Add PeauRouge to host"
+      ignore_errors: true
+      lineinfile:
+        path: /etc/hosts
+        line: 192.168.122.114 peaurouge.local
+        state: present
+        backup: yes
