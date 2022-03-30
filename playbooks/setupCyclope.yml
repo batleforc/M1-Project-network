@@ -45,6 +45,7 @@
       shell: sudo systemctl restart redis.service
 - hosts: "cyclope"
   name: "Setup SFTP"
+  become: true
   tasks:
     - name: "Create sftp group"
       group:
