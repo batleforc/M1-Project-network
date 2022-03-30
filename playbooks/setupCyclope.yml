@@ -24,7 +24,7 @@
     - name: "bind redis to localhost and cyclope"
       lineinfile:
         path: /etc/redis/redis.conf
-        regexp: "bind"
+        regexp: "bind 127.0.0.1 ::1"
         line: bind 127.0.0.1 ::1 localhost 10.8.3.2 10.8.1.2
     - name: "Edit Line if exist and add password"
       ignore_errors: true
