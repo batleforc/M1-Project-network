@@ -1,13 +1,42 @@
 - hosts: "cyclope"
   name: "Setup Cyclope Redis"
   tasks:
-    - name: "Add Redis Key"
-      shell: "curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg"
-    - name: "Add Redis repository"
-      shell: "echo 'deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main' | sudo tee /etc/apt/sources.list.d/redis.list"
-    - name: "Update repository"
-      apt:
-        update_cache: yes
     - name: "Install Redis"
       apt:
-        name: "redis"
+        update_cache: yes
+        name: "redis-server"
+    - name: "Edit Line if exist"
+      ignore_errors: true
+      lineinfile:
+        path: /etc/redis/redis.conf
+        regexp: "supervised"
+        line: supervised systemd
+        state: present
+        backup: yes
+    - name: "Insert if line not exist"
+      ignore_errors: true
+      lineinfile:
+        path: /etc/redis/redis.conf
+        line: supervised systemd
+        state: present
+        backup: yes
+    - name: "bind redis to localhost and cyclope"
+      lineinfile:
+        path: /etc/redis/redis.conf
+        regexp: "bind"
+        line: bind 127.0.0.1 ::1 localhost 10.8.3.2 10.8.1.2
+    - name: "Edit Line if exist and add password"
+      ignore_errors: true
+      lineinfile:
+        path: /etc/redis/redis.conf
+        regexp: "requirepass"
+        line: requirepass {{ redis_password }}
+        state: present
+        backup: yes
+    - name: "Insert if line not exist and add password"
+      ignore_errors: true
+      lineinfile:
+        path: /etc/redis/redis.conf
+        line: requirepass {{ redis_password }}
+        state: present
+        backup: yes
