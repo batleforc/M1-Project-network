@@ -64,6 +64,20 @@
         owner: "{{ sftp_user }}"
         group: sftp_users
         mode: 0755
+    - name: "Create Cyclope App Folder"
+      file:
+        path: /usr/local/network
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+    - name: "Create Cyclope App Folder"
+      file:
+        path: /usr/local/network/use
+        state: directory
+        owner: "{{ sftp_user }}"
+        group: sftp_users
+        mode: 0755
     - name: "Add sftp config to /etc/ssh/sshd_config"
       lineinfile:
         path: /etc/ssh/sshd_config
@@ -82,7 +96,7 @@
     - name: "Add no x11Forward config to /etc/ssh/sshd_config"
       lineinfile:
         path: /etc/ssh/sshd_config
-        insertafter: ChrootDirectory /usr/local/
+        insertafter: ChrootDirectory /usr/local/network
         line: x11Forwarding no
         state: present
         backup: yes
