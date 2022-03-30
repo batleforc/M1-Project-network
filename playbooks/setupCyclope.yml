@@ -41,3 +41,7 @@
         line: requirepass {{ redis_password }}
         state: present
         backup: yes
+    - name: "Restart redis"
+      service:
+        name: redis-server
+        state: restarted
