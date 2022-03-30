@@ -63,7 +63,7 @@
         state: directory
         owner: "{{ sftp_user }}"
         group: sftp_users
-        mode: 0701
+        mode: 0755
     - name: "Add sftp config to /etc/ssh/sshd_config"
       lineinfile:
         path: /etc/ssh/sshd_config
