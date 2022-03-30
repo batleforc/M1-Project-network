@@ -56,7 +56,6 @@
         group: sftp_users
         home: /usr/local/network
         shell: /bin/nologin
-        password: "{{ sftp_password }}"
     - name: "Set sftp user password"
       command: "echo {{ sftp_password }} | passwd --stdin {{ sftp_user }}"
     - name: "Create Cyclope App Folder"
