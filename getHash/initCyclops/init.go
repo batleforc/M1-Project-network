@@ -27,7 +27,7 @@ const (
 	sftpHost      = "10.8.1.1"
 	sftpPort      = "22"
 	distantFolder = "./use"
-	backupFolder  = "/usr/local/network/bck"
+	backupFolder  = "./bck"
 	redisIP       = sftpHost + ":6379"
 )
 
@@ -140,7 +140,7 @@ type remoteFiles struct {
 func listFiles(directory string) (theFiles []remoteFiles, err error) {
 	files, err := ioutil.ReadDir(directory)
 	if err != nil {
-		return theFiles, fmt.Errorf("Unable to list remote dir: %v", err)
+		return theFiles, fmt.Errorf("Unable to list local dir: %v", err)
 	}
 
 	for _, f := range files {
