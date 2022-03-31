@@ -93,7 +93,7 @@ func (c *Controller) Protected(ctx *gin.Context) {
 	_, _, ok := ctx.Request.BasicAuth()
 	if ok {
 		ctx.Next()
-		ctx.HTML(http.StatusOK, "./index.html", gin.H{})
+		ctx.HTML(http.StatusOK, "index.html", nil)
 		return
 	}
 	ctx.AbortWithStatus(401)
