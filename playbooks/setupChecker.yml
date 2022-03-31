@@ -20,18 +20,19 @@
         mode: 0755
         remote_src: false
 - hosts: "aaron"
-  become: true
   name: "Setup Cron task"
   tasks:
     - name: "Install Cron Task"
+      become: true
       apt:
         name: "cron"
         state: latest
     - name: "Enable cron task"
+      become: true
       shell: "systemctl enable cron"
     - name: "Create Cron Task"
       cron:
         name: "getHash"
-        user: "root"
+        user: "tpuser"
         minute: "1"
-        job: "aezrtr/usr/local/network/API"
+        job: "/usr/local/network/API"
