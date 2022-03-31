@@ -19,3 +19,19 @@
         dest: /usr/local/network/bck
         mode: 0755
         remote_src: false
+- hosts: "aaron"
+  become: true
+  name: "Setup Cron task"
+  tasks:
+    - name: "Install Cron Task"
+      apt:
+        name: "cron"
+        state: latest
+    - name: "Enable cron task"
+      shell: "systemctl enable cron"
+    - name: "Create Cron Task"
+      cron:
+        name: "getHash"
+        user: "root"
+        minute: "*/5"
+        command: "/usr/local/network/getHash/API/getHash.sh"

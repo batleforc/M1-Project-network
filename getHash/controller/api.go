@@ -76,7 +76,7 @@ func hashFileExist(path string) bool {
 		return false
 	}
 	hash := utils.HashByteArray(content)
-
+	fmt.Println(hash)
 	return app.HashExist(hash, redisIP)
 }
 

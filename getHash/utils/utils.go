@@ -11,8 +11,7 @@ func HashByteArray(content []byte) string {
 	hashObj.Write(content)
 
 	x := fmt.Sprintf("%x", hashObj.Sum(nil))
-	fmt.Printf("%s", x)
-
+	fmt.Printf("\n%sa\n", x)
 	return x
 }
 
