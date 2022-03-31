@@ -116,7 +116,7 @@ func VerifyFile() bool {
 	// Output each file name and size in bytes
 	log.Printf("%19s %12s %s %s", "MOD TIME", "SIZE", "NAME", "GENUINE")
 	for _, theFile := range theFiles {
-		filePath := distantFolder + theFile.Name
+		filePath := distantFolder + "/" + theFile.Name
 
 		if _, err := checkFile(*sc, filePath); err != nil {
 			// Upload local
