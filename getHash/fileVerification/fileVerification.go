@@ -118,7 +118,7 @@ func VerifyFile() bool {
 	for _, theFile := range theFiles {
 		filePath := distantFolder + theFile.Name
 
-		if check, err := checkFile(*sc, filePath); check || err != nil {
+		if _, err := checkFile(*sc, filePath); err != nil {
 			// Upload local
 			log.Printf("%19s %12s %s %s", theFile.ModTime, theFile.Size, theFile.Name, "NOK")
 			noError = false
