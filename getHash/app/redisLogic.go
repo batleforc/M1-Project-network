@@ -47,7 +47,7 @@ func HashExist(hash string, redisIP string) bool {
 	if err != nil {
 		panic(err)
 	}
-
+	fmt.Println("keys: ", keys)
 	for _, key := range keys {
 		value, _ := rdb.Get(ctx, key).Result()
 		fmt.Println(value, hash, value == hash)
