@@ -217,9 +217,10 @@ func backupFile(sc sftp.Client, localFile, remoteFile string) (hash string, err 
 		log.Fatal(err)
 	}
 
-	fmt.Printf("%x", hashObj.Sum(nil))
+	x:= fmt.Sprintf("%x", hashObj.Sum(nil))
+	fmt.Printf("%x", x)
 
-	return string(hashObj.Sum(nil)), nil
+	return x, nil
 }
 
 // Get host key from local known hosts
