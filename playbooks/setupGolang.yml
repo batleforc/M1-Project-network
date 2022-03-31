@@ -1,0 +1,20 @@
+- hosts: localhost
+  name: "Download golang"
+  become: true
+  tasks:
+    - name: "Download golang"
+      shell: "wget https://go.dev/dl/go1.18.linux-amd64.tar.gz"
+- hosts: "TP"
+  become: true
+  name: "Install Golang"
+  tasks:
+    - name: "Get Golang"
+      ansible.builtin.copy:
+        src: go1.18.linux-amd64.tar.gz
+        dest: /tmp/go1.18.linux-amd64.tar.gz
+        mode: 777
+        remote_src: false
+    - name: "Extract golang"
+      shell: "tar -C /usr/local -xzf /tmp/go1.18.linux-amd64.tar.gz"
+    - name: "Add go to path"
+      shell: "echo 'export PATH=$PATH:/usr/local/go/bin' >> /etc/profile"
