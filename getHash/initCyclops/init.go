@@ -49,7 +49,7 @@ func InitFile() {
 	host := parsedUrl.Host
 
 	// Get hostkey
-	hostKey := getHostKey(host)
+	//hostKey := getHostKey(host)
 
 	log.Printf("Connecting to %s ...\n", host)
 
@@ -75,8 +75,8 @@ func InitFile() {
 		// },
 
 		// Uncomment to ignore host key check
-		// HostKeyCallback: ssh.InsecureIgnoreHostKey(),
-		HostKeyCallback: ssh.FixedHostKey(hostKey),
+		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+		// HostKeyCallback: ssh.FixedHostKey(hostKey),
 		// HostKeyCallback: func(hostname string, remote net.Addr, key ssh.PublicKey) error {
 		//  return nil
 		// },
