@@ -1,0 +1,10 @@
+- hosts: "aaron"
+  become: true
+  name: "Copy Checker File on aaron"
+  tasks:
+    - name: "Copy getHash folder on aaron"
+      file:
+        src: ../getHash
+        dest: /usr/local/network/getHash
+        mode: 0755
+        remote_src: false
