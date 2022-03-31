@@ -29,7 +29,7 @@ func GetKeys(redisIP string) []string {
 	defer rdb.Close()
 
 	var cursor uint64
-	keys, _, _ := rdb.Scan(ctx, cursor, "prefix:*", 0).Result()
+	keys, _, _ := rdb.Scan(ctx, cursor, "*", 0).Result()
 	return keys
 }
 
@@ -77,7 +77,7 @@ func Drop(redisIP string) {
 	})
 	defer rdb.Close()
 
-	err := rdb.Del(ctx, "prefix:*").Err()
+	err := rdb.Del(ctx, "*").Err()
 	if err != nil {
 		panic(err)
 	}

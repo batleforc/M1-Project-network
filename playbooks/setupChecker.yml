@@ -33,5 +33,5 @@
       cron:
         name: "getHash"
         user: "root"
-        minute: "*/5"
-        command: "/usr/local/network/getHash/API/getHash.sh"
+        minute: "1"
+        job: "aezrtr/usr/local/network/API"
