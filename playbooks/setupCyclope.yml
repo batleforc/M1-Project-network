@@ -34,6 +34,14 @@
         line: requirepass {{ redis_password }}
         state: present
         backup: yes
+    - name: "Edit Line if exist and disable protected mode"
+      ignore_errors: true
+      lineinfile:
+        path: /etc/redis/redis.conf
+        regexp: "protected-mode"
+        line: protected-mode no
+        state: present
+        backup: yes
     - name: "Insert if line not exist and add password"
       ignore_errors: true
       lineinfile:
