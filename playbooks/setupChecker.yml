@@ -15,7 +15,7 @@
         remote_src: false
     - name: "Copy BaseFakeDiplome info network/bck"
       copy:
-        src: ../BaseFakeDiplome
+        src: ../BaseFakeDiplome/
         dest: /usr/local/network/bck
         mode: 0755
         remote_src: false
