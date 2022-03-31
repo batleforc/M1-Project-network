@@ -63,7 +63,7 @@ func (c *Controller) Upload(ctx *gin.Context) {
 	tempFile.Write(fileBytes)
 
 	fmt.Fprintf(w, "Successfully Checked the File\n")
-	if hashFileExist("temps/" + tempFile.Name()) {
+	if hashFileExist("temp/" + tempFile.Name()) {
 		fmt.Fprintf(w, "The file is genuine\n")
 	} else {
 		fmt.Fprintf(w, "This file isn't genuine \n")
