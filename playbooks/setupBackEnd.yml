@@ -17,12 +17,12 @@
     - name: "Fetch apache key"
       fetch:
         src: /root/pki/certificats/apache.key
-        dest: ./apache/apache.key
+        dest: ../apache/apache.key
         flat: yes
     - name: "Fetch apache crt"
       fetch:
         src: /root/pki/certificats/apache.crt
-        dest: ./apache/apache.crt
+        dest: ../apache/apache.crt
         flat: yes
 - hosts: "peaurouge"
   become: true
@@ -34,12 +34,12 @@
         state: directory
     - name: "Copy key from host to apache"
       fetch:
-        src: ./apache/apache.key
+        src: ../apache/apache.key
         dest: /etc/apache2/certs/apache.key
         flat: yes
     - name: "Copy crt from host to apache"
       fetch:
-        src: ./apache/apache.crt
+        src: ../apache/apache.crt
         dest: /etc/apache2/certs/apache.key
         flat: yes
 - hosts: "peaurouge"
