@@ -41,7 +41,7 @@
     - name: "Copy crt from host to apache"
       copy:
         src: ../apache/apache.crt
-        dest: /etc/apache2/certs/apache.key
+        dest: /etc/apache2/certs/apache.crt
         mode: 0755
         remote_src: false
 - hosts: "peaurouge"
