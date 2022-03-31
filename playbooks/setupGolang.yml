@@ -1,4 +1,4 @@
-- hosts: "TP"
+- hosts: "localhost"
   become: true
   name: "Install Golang"
   tasks:
