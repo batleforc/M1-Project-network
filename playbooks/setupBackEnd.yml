@@ -63,7 +63,7 @@
         path: /usr/local/network/getHash/temp
         state: directory
     - name: "Start backend with screen"
-      command: "screen -d -m -S getHash ./usr/local/network/getHash/API"
+      command: "screen -d -m -S getHash ./usr/local/network/getHash/API -api"
 - hosts: "peaurouge"
   become: true
   name: "Configure apache"
