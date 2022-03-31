@@ -1,5 +1,4 @@
 basePath: /api
-host: :8080
 info:
   contact: {}
   license:

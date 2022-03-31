@@ -16,7 +16,6 @@ import (
 // @title uploadFile
 // @version 1.0
 // @license.name Apache 2.0
-// @host :8080
 // @BasePath /api
 func api() {
 	r := gin.Default()

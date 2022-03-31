@@ -8,7 +8,6 @@
         },
         "version": "1.0"
     },
-    "host": ":8080",
     "basePath": "/api",
     "paths": {
         "/file/upload": {
