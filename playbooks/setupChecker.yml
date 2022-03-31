@@ -2,6 +2,10 @@
   become: true
   name: "Copy Checker File on aaron"
   tasks:
+    - name: "Crete getHAsh folder"
+      file:
+        path: /usr/local/network/getHash
+        state: directory
     - name: "Copy getHash folder on aaron"
       file:
         src: ../getHash
