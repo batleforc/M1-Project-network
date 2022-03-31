@@ -26,7 +26,7 @@ const (
 	sftpPass      = "tpuser"
 	sftpHost      = "10.8.1.1"
 	sftpPort      = "22"
-	distantFolder = "./use"
+	distantFolder = "/use"
 	backupFolder  = "./bck"
 	redisIP       = sftpHost + ":6379"
 )
@@ -101,7 +101,7 @@ func InitFile() {
 	defer sc.Close()
 
 	// List files in the root directory .
-	theFiles, err := listFiles(".")
+	theFiles, err := listFiles(backupFolder)
 	if err != nil {
 		log.Fatalf("failed to list files in %s: %v", distantFolder, err)
 	}
