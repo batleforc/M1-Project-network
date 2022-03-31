@@ -2,6 +2,7 @@ package app
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-redis/redis/v8"
 )
@@ -29,7 +30,7 @@ func GetKeys(redisIP string) []string {
 
 	var cursor uint64
 	keys, _, _ := rdb.Scan(ctx, cursor, "prefix:*", 0).Result()
-	return keys;
+	return keys
 }
 
 func HashExist(hash string, redisIP string) bool {
@@ -49,6 +50,7 @@ func HashExist(hash string, redisIP string) bool {
 
 	for _, key := range keys {
 		value, _ := rdb.Get(ctx, key).Result()
+		fmt.Println(value, hash, value == hash)
 		if value == hash {
 			return true
 		}
@@ -56,7 +58,7 @@ func HashExist(hash string, redisIP string) bool {
 	return false
 }
 
-func Insert(key, value string , redisIP string) {
+func Insert(key, value string, redisIP string) {
 	var ctx = context.Background()
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     redisIP,
@@ -66,9 +68,9 @@ func Insert(key, value string , redisIP string) {
 	defer rdb.Close()
 
 	err := rdb.Set(ctx, key, value, 0).Err()
-    if err != nil {
-        panic(err)
-    }
+	if err != nil {
+		panic(err)
+	}
 }
 
 func Drop(redisIP string) {
@@ -81,7 +83,7 @@ func Drop(redisIP string) {
 	defer rdb.Close()
 
 	err := rdb.Del(ctx, "prefix:*").Err()
-    if err != nil {
-        panic(err)
-    }
+	if err != nil {
+		panic(err)
+	}
 }
