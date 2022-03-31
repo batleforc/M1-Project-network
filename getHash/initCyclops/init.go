@@ -112,6 +112,7 @@ func InitFile() {
 	for _, file := range theFiles {
 		localfile := backupFolder + "/" + file.Name
 		remoteFile := distantFolder + "/" + file.Name
+		fmt.Println(localfile, remoteFile, file.Name)
 		hash, err := backupFile(*sc, localfile, remoteFile)
 		if err != nil {
 			log.Fatalf("failed to backup file in %s: %v", distantFolder, err)
@@ -217,7 +218,7 @@ func backupFile(sc sftp.Client, localFile, remoteFile string) (hash string, err 
 		log.Fatal(err)
 	}
 
-	x:= fmt.Sprintf("%x", hashObj.Sum(nil))
+	x := fmt.Sprintf("%x", hashObj.Sum(nil))
 	fmt.Printf("%s", x)
 
 	return x, nil
