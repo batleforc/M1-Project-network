@@ -19,7 +19,7 @@ import (
 // @BasePath /api
 func api() {
 	r := gin.Default()
-	r.LoadHTMLFiles("index.html")
+	r.LoadHTMLFiles("./index.html")
 
 	c := controller.NewController()
 
