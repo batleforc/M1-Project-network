@@ -14,12 +14,55 @@
       shell: "cd /root/pki && openssl req -new -key certificats/apache.key -out certificats/apache.csr -config config/apache.config"
     - name: "Sign csr in certificats"
       shell: "cd /root/pki && openssl ca -batch -config config/ca.config -days 3650 -notext -md sha256 -in certificats/apache.csr -out certificats/apache.crt"
+    - name: "Fetch apache key"
+      fetch:
+        src: /root/pki/certificats/apache.key
+        dest: ./apache/apache.key
+        flat: yes
+    - name: "Fetch apache crt"
+      fetch:
+        src: /root/pki/certificats/apache.crt
+        dest: ./apache/apache.crt
+        flat: yes
+- hosts: "peaurouge"
+  become: true
+  name: "Setup apache certificate from pki"
+  tasks:
+    - name: "Create Cert folder"
+      file:
+        path: /etc/apache2/certs
+        state: directory
+    - name: "Copy key from host to apache"
+      fetch:
+        src: ./apache/apache.key
+        dest: /etc/apache2/certs/apache.key
+        flat: yes
+    - name: "Copy crt from host to apache"
+      fetch:
+        src: ./apache/apache.crt
+        dest: /etc/apache2/certs/apache.key
+        flat: yes
+
 - hosts: "peaurouge"
   become: true
   name: "Configure apache"
   tasks:
+    - name: "install Apache2"
+      apt:
+        name: "apache2"
+        state: latest
+        update_cache: yes
     - name: "Enable SSL"
       shell: "a2enmod ssl"
+    - name: "Enable Reverse proxy"
+      shell: "a2enmod proxy_http"
     - name: "reload apache"
       shell: "service apache2 force-reload"
-    - name: ""
+    - name: "Copy ssl conf from host"
+      ansible.builtin.copy:
+        src: ../apache/ssl.conf
+        dest: /etc/apache2/sites-available/ssl.conf
+        mode: 0640
+        remote_src: false
+    - name: "Enable ssl.conf"
+      shell: "a2ensite ssl.conf"
