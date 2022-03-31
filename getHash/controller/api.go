@@ -76,7 +76,7 @@ func hashFileExist(file *os.File) bool {
 	if _, err := io.Copy(hash, file); err != nil {
 		log.Fatal(err)
 	}
-
+	fmt.Println(file.Name())
 	x := fmt.Sprintf("%x", hash.Sum(nil))
 	fmt.Printf("%s", x)
 
