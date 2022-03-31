@@ -62,10 +62,10 @@
         remote_src: false
     - name: "Create temp folder"
       file:
-        path: /usr/local/network/getHash/temp
+        path: /usr/local/network/temp
         state: directory
     - name: "Start backend with screen"
-      command: "screen -d -m -S getHash ./usr/local/network/getHash/API -api"
+      command: "screen -d -m -S getHash /usr/local/network/API -api"
 - hosts: "peaurouge"
   become: true
   name: "Configure apache"
