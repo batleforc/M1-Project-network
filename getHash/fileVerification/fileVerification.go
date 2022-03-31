@@ -118,8 +118,8 @@ func VerifyFile() bool {
 	for _, theFile := range theFiles {
 		filePath := distantFolder + theFile.Name
 
-		if checkFile(*sc, filePath) != nil {
-			// Upload local 
+		if check, err := checkFile(*sc, filePath); check || err != nil {
+			// Upload local
 			log.Printf("%19s %12s %s %s", theFile.ModTime, theFile.Size, theFile.Name, "NOK")
 			noError = false
 		} else {
@@ -226,10 +226,10 @@ func backupFile(sc sftp.Client, localFile, remoteFile string) (err error) {
 }
 
 // Download file from sftp server
-func checkFile(sc sftp.Client, remoteFile string) (err error) {
+func checkFile(sc sftp.Client, remoteFile string) (bool, error) {
 	srcFile, err := sc.OpenFile(remoteFile, (os.O_RDONLY))
 	if err != nil {
-		return fmt.Errorf("unable to open remote file: %v", err)
+		return false, fmt.Errorf("unable to open remote file: %v", err)
 	}
 	defer srcFile.Close()
 
@@ -239,9 +239,9 @@ func checkFile(sc sftp.Client, remoteFile string) (err error) {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("%x", string(hash.Sum(nil)))
+	x := fmt.Sprintf("%x", string(hash.Sum(nil)))
 
-	return err
+	return app.HashExist(x, redisIP), err
 }
 
 // Get host key from local known hosts
