@@ -19,20 +19,6 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/disconnect": {
-            "get": {
-                "description": "disconnect",
-                "summary": "Disconnect",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/file/upload": {
             "post": {
                 "description": "Upload file",
@@ -65,7 +51,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "localhost:8080",
+	Host:             ":8080",
 	BasePath:         "/api",
 	Schemes:          []string{},
 	Title:            "uploadFile",

@@ -8,23 +8,9 @@
         },
         "version": "1.0"
     },
-    "host": "localhost:8080",
+    "host": ":8080",
     "basePath": "/api",
     "paths": {
-        "/disconnect": {
-            "get": {
-                "description": "disconnect",
-                "summary": "Disconnect",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/file/upload": {
             "post": {
                 "description": "Upload file",
