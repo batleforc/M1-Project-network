@@ -101,7 +101,7 @@ func InitFile() {
 	defer sc.Close()
 
 	// List files in the root directory .
-	theFiles, err := listFiles(distantFolder)
+	theFiles, err := listFiles(".")
 	if err != nil {
 		log.Fatalf("failed to list files in %s: %v", distantFolder, err)
 	}
