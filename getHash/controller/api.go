@@ -73,6 +73,7 @@ func (c *Controller) Upload(ctx *gin.Context) {
 func hashFileExist(path string) bool {
 	content, err := utils.GetByteArrayFromPath(path)
 	if err != nil {
+		fmt.Println(err)
 		return false
 	}
 	hash := utils.HashByteArray(content)
