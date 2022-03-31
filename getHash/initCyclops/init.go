@@ -22,7 +22,7 @@ import (
 )
 
 const (
-	sftpUser      = "tpuser"
+	sftpUser      = "sftp"
 	sftpPass      = "tpuser"
 	sftpHost      = "10.8.1.1"
 	sftpPort      = "22"
@@ -108,7 +108,7 @@ func InitFile() {
 
 	deleteFiles(*sc, distantFolder)
 	app.Drop(redisIP)
-	
+
 	for _, file := range theFiles {
 		localfile := backupFolder + file.Name
 		remoteFile := distantFolder + file.Name
@@ -211,7 +211,6 @@ func backupFile(sc sftp.Client, localFile, remoteFile string) (hash string, err 
 		return "", fmt.Errorf("Unable to upload local file: %v", err)
 	}
 	log.Printf("%d bytes copied", bytes)
-
 
 	hashObj := sha256.New()
 	if _, err := io.Copy(hashObj, srcFile); err != nil {
