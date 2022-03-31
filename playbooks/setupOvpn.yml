@@ -62,3 +62,5 @@
       command: "sudo systemctl enable openvpn@client.service"
     - name: Start Service OpenVPN
       command: "sudo systemctl start openvpn@client.service"
+    - name: Restart Service OpenVPN
+      command: "sudo systemctl restart openvpn@client.service"
