@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	redisIP = "10.8.3.1:6379"
+	redisIP = "10.8.1.1:6379"
 )
 
 // @Summary Upload file
