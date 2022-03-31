@@ -8,6 +8,7 @@ import (
 	"M1/Network/API/controller"
 	_ "M1/Network/API/docs"
 	"M1/Network/API/fileVerification"
+	"M1/Network/API/initCyclops"
 
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -42,17 +43,21 @@ func api() {
 	r.Run(":8080")
 }
 
-func checkData() {
-	fileVerification.VerifyFile()
+func initRedis() {
 }
 
 func main() {
 	apiFlag := flag.Bool("api", false, "a bool")
+	initRedisFlag := flag.Bool("initRedis", false, "a bool")
 	flag.Parse()
 
 	if *apiFlag {
 		api()
+	} else if *initRedisFlag {
+		initCyclops.InitFile()
 	} else {
-		checkData()
+		if(!fileVerification.VerifyFile()) {
+			initCyclops.InitFile()
+		}
 	}
 }

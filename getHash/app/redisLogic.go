@@ -55,3 +55,33 @@ func HashExist(hash string, redisIP string) bool {
 	}
 	return false
 }
+
+func Insert(key, value string , redisIP string) {
+	var ctx = context.Background()
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     redisIP,
+		Password: "tpuser",
+		DB:       0, // use default DB
+	})
+	defer rdb.Close()
+
+	err := rdb.Set(ctx, key, value, 0).Err()
+    if err != nil {
+        panic(err)
+    }
+}
+
+func Drop(redisIP string) {
+	var ctx = context.Background()
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     redisIP,
+		Password: "tpuser",
+		DB:       0, // use default DB
+	})
+	defer rdb.Close()
+
+	err := rdb.Del(ctx, "prefix:*").Err()
+    if err != nil {
+        panic(err)
+    }
+}

@@ -30,7 +30,7 @@ const (
 	redisIP       = sftpHost + ":6379"
 )
 
-func VerifyFile() {
+func VerifyFile() bool {
 	noError := true
 	// Create a url
 	rawurl := fmt.Sprintf("sftp://%v:%v@%v", sftpUser, sftpPass, sftpHost)
@@ -127,15 +127,7 @@ func VerifyFile() {
 		}
 	}
 
-	if(!noError) {
-		deleteFiles(*sc, distantFolder)
-
-		for _, key := range keys {
-			localfile := backupFolder + key
-			remoteFile := distantFolder + key
-			backupFile(*sc, localfile, remoteFile)
-		}
-	}
+	return noError
 }
 
 func SshInteractive(user, instruction string, questions []string, echos []bool) (answers []string, err error) {
