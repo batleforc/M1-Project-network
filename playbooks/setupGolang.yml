@@ -19,4 +19,4 @@
         mode: 0755
         remote_src: false
     - name: "Build golang"
-      command: "cd /tmp/getHash && go build"
+      shell: "cd /tmp/getHash && /usr/local/go/bin/go build"
