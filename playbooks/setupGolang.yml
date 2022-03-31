@@ -4,7 +4,7 @@
   tasks:
     - name: "Get Golang"
       ansible.builtin.copy:
-        src: ./go1.18.linux-amd64.tar.gz
+        src: ./golang/go1.18.linux-amd64.tar.gz
         dest: /tmp/go1.18.linux-amd64.tar.gz
         mode: 777
         remote_src: false
