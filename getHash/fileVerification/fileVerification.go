@@ -2,8 +2,8 @@ package fileVerification
 
 import (
 	"M1/Network/API/app"
+	"M1/Network/API/utils"
 	"bufio"
-	"crypto/sha256"
 	"fmt"
 	"io"
 	"log"
@@ -233,15 +233,13 @@ func checkFile(sc sftp.Client, remoteFile string) (bool, error) {
 	}
 	defer srcFile.Close()
 
-	hash := sha256.New()
-
-	if _, err := io.Copy(hash, srcFile); err != nil {
-		log.Fatal(err)
+	content, err := io.ReadAll(srcFile)
+	if err != nil {
+		return false, err
 	}
+	hash := utils.HashByteArray(content)
 
-	x := fmt.Sprintf("%x", string(hash.Sum(nil)))
-
-	return app.HashExist(x, redisIP), err
+	return app.HashExist(hash, redisIP), err
 }
 
 // Get host key from local known hosts

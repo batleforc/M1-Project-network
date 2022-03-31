@@ -2,9 +2,8 @@ package controller
 
 import (
 	"M1/Network/API/app"
-	"crypto/sha256"
+	"M1/Network/API/utils"
 	"fmt"
-	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -64,23 +63,21 @@ func (c *Controller) Upload(ctx *gin.Context) {
 	tempFile.Write(fileBytes)
 
 	fmt.Fprintf(w, "Successfully Checked the File\n")
-	if hashFileExist(tempFile) {
+	if hashFileExist("temps/" + tempFile.Name()) {
 		fmt.Fprintf(w, "The file is genuine\n")
 	} else {
 		fmt.Fprintf(w, "This file isn't genuine \n")
 	}
 }
 
-func hashFileExist(file *os.File) bool {
-	hash := sha256.New()
-	if _, err := io.Copy(hash, file); err != nil {
-		log.Fatal(err)
+func hashFileExist(path string) bool {
+	content, err := utils.GetByteArrayFromPath(path)
+	if err != nil {
+		return false
 	}
-	fmt.Println(file.Name())
-	x := fmt.Sprintf("%x", hash.Sum(nil))
-	fmt.Printf(" hash.sum :%s \n", x)
+	hash := utils.HashByteArray(content)
 
-	return app.HashExist(x, redisIP)
+	return app.HashExist(hash, redisIP)
 }
 
 func removeFile(file string) {

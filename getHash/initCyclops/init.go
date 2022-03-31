@@ -2,8 +2,8 @@ package initCyclops
 
 import (
 	"M1/Network/API/app"
+	"M1/Network/API/utils"
 	"bufio"
-	"crypto/sha256"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -191,11 +191,6 @@ func backupFile(sc sftp.Client, localFile, remoteFile string) (hash string, err 
 	}
 	defer srcFile.Close()
 
-	content, err := ioutil.ReadFile(localFile)
-	if err != nil {
-		return "", fmt.Errorf("Unable to open local file: %v", err)
-	}
-
 	// Make remote directories recursion
 	parent := filepath.Dir(remoteFile)
 	path := string(filepath.Separator)
@@ -218,13 +213,13 @@ func backupFile(sc sftp.Client, localFile, remoteFile string) (hash string, err 
 	}
 	log.Printf("%d bytes copied", bytes)
 
-	hashObj := sha256.New()
-	hashObj.Write(content)
+	content, err := utils.GetByteArrayFromPath(localFile)
+	if err != nil {
+		return "", err
+	}
+	hash = utils.HashByteArray(content)
 
-	x := fmt.Sprintf("%x", hashObj.Sum(nil))
-	fmt.Printf("%s", x)
-
-	return x, nil
+	return hash, nil
 }
 
 // Get host key from local known hosts
