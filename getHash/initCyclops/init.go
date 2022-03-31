@@ -140,7 +140,7 @@ type remoteFiles struct {
 func listFiles(directory string) (theFiles []remoteFiles, err error) {
 	files, err := ioutil.ReadDir(directory)
 	if err != nil {
-		return theFiles, fmt.Errorf("Unable to list local dir: %v", err)
+		return theFiles, fmt.Errorf("Unable to list local dir in %s : %v", directory, err)
 	}
 
 	for _, f := range files {
@@ -170,7 +170,7 @@ func deleteFiles(sc sftp.Client, remoteDir string) {
 	files, err := sc.ReadDir(remoteDir)
 
 	if err != nil {
-		log.Fatalf("%v", fmt.Errorf("unable to list remote dir: %v", err))
+		log.Fatalf("%v", fmt.Errorf("unable to list remote dir for deletion in %s : %v", remoteDir, err))
 	}
 
 	for _, f := range files {
