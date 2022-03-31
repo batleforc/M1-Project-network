@@ -78,7 +78,7 @@ func hashFileExist(file *os.File) bool {
 	}
 	fmt.Println(file.Name())
 	x := fmt.Sprintf("%x", hash.Sum(nil))
-	fmt.Printf("%s", x)
+	fmt.Printf(" hash.sum :%s \n", x)
 
 	return app.HashExist(x, redisIP)
 }

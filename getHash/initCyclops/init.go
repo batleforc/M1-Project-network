@@ -191,6 +191,11 @@ func backupFile(sc sftp.Client, localFile, remoteFile string) (hash string, err 
 	}
 	defer srcFile.Close()
 
+	content, err := ioutil.ReadFile(localFile)
+	if err != nil {
+		return "", fmt.Errorf("Unable to open local file: %v", err)
+	}
+
 	// Make remote directories recursion
 	parent := filepath.Dir(remoteFile)
 	path := string(filepath.Separator)
@@ -214,11 +219,8 @@ func backupFile(sc sftp.Client, localFile, remoteFile string) (hash string, err 
 	log.Printf("%d bytes copied", bytes)
 
 	hashObj := sha256.New()
-	if _, err := io.Copy(hashObj, srcFile); err != nil {
-		log.Fatal(err)
-	}
 
-	x := fmt.Sprintf("%x", hashObj.Sum(nil))
+	x := fmt.Sprintf("%x", hashObj.Sum(content))
 	fmt.Printf("%s", x)
 
 	return x, nil
