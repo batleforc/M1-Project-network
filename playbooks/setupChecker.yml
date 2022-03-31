@@ -7,7 +7,7 @@
         path: /usr/local/network/getHash
         state: directory
     - name: "Copy getHash folder on aaron"
-      file:
+      copy:
         src: ../getHash
         dest: /usr/local/network/getHash
         mode: 0755
