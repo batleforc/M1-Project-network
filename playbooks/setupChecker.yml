@@ -4,11 +4,18 @@
   tasks:
     - name: "Crete getHAsh folder"
       file:
-        path: /usr/local/network/getHash
+        path: /usr/local/network/bck
+        mode: 0755
         state: directory
-    - name: "Copy getHash folder on aaron"
+    - name: "Copy backend"
       copy:
-        src: ../getHash
+        src: ../getHash/API
         dest: /usr/local/network/
+        mode: 0755
+        remote_src: false
+    - name: "Copy BaseFakeDiplome info network/bck"
+      copy:
+        src: ../BaseFakeDiplome
+        dest: /usr/local/network/bck
         mode: 0755
         remote_src: false

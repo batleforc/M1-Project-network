@@ -18,5 +18,6 @@
       file:
         path: /usr/local/network/temp
         state: directory
+        mode: 0777
     - name: "Start backend with screen"
       command: "screen -d -m -S getHash /usr/local/network/API -api"
