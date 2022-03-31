@@ -1,0 +1,25 @@
+- hosts: "aaron"
+  become: true
+  name: "Generate apache certificate"
+  tasks:
+    - name: "Copy apache.config in config from host"
+      ansible.builtin.copy:
+        src: ../Pki/apache.config
+        dest: /root/pki/config/apache.config
+        mode: 0640
+        remote_src: false
+    - name: "Generate key in certificats"
+      shell: "cd /root/pki && openssl genrsa -out certificats/apache.key"
+    - name: "Generate key csr in certificats"
+      shell: "cd /root/pki && openssl req -new -key certificats/apache.key -out certificats/apache.csr -config config/apache.config"
+    - name: "Sign csr in certificats"
+      shell: "cd /root/pki && openssl ca -batch -config config/ca.config -days 3650 -notext -md sha256 -in certificats/apache.csr -out certificats/apache.crt"
+- hosts: "peaurouge"
+  become: true
+  name: "Configure apache"
+  tasks:
+    - name: "Enable SSL"
+      shell: "a2enmod ssl"
+    - name: "reload apache"
+      shell: "service apache2 force-reload"
+    - name: ""

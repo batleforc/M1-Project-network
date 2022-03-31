@@ -1,0 +1,36 @@
+basePath: /api
+host: localhost:8080
+info:
+  contact: {}
+  license:
+    name: Apache 2.0
+  title: uploadFile
+  version: "1.0"
+paths:
+  /disconnect:
+    get:
+      description: disconnect
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Disconnect
+  /file/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Upload file
+      parameters:
+      - description: this is a test file
+        in: formData
+        name: myFile
+        required: true
+        type: file
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: Upload file
+swagger: "2.0"

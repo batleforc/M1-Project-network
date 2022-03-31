@@ -1,0 +1,16 @@
+- hosts: "aaron"
+  become: true
+  name: "Generate Ovpn Certificate"
+  tasks:
+    - name: "Copy ovpn.config in config from host"
+      ansible.builtin.copy:
+        src: ../Pki/ovpn.config
+        dest: /root/pki/config/ovpn.config
+        mode: 0640
+        remote_src: false
+    - name: "Generate key in certificats"
+      shell: "cd /root/pki && openssl genrsa -out certificats/ovpn.key"
+    - name: "Generate key csr in certificats"
+      shell: "cd /root/pki && openssl req -new -key certificats/ovpn.key -out certificats/ovpn.csr -config config/ovpn.config"
+    - name: "Sign csr in certificats"
+      shell: "cd /root/pki && openssl ca -batch -config config/ca.config -days 3650 -notext -md sha256 -in certificats/ovpn.csr -out certificats/ovpn.crt"
