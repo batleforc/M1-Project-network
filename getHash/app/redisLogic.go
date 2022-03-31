@@ -42,8 +42,7 @@ func HashExist(hash string, redisIP string) bool {
 	})
 	defer rdb.Close()
 
-	var cursor uint64
-	keys, _, err := rdb.Scan(ctx, cursor, "prefix:*", 0).Result()
+	keys, _, err := rdb.Scan(ctx, 0, "prefix:*", 0).Result()
 	if err != nil {
 		panic(err)
 	}
