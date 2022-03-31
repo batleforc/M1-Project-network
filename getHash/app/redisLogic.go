@@ -42,7 +42,7 @@ func HashExist(hash string, redisIP string) bool {
 	})
 	defer rdb.Close()
 
-	iter := rdb.Scan(ctx, 0, "prefix:*", 0).Iterator()
+	iter := rdb.Scan(ctx, 0, "*", 0).Iterator()
 	for iter.Next(ctx) {
 		value, _ := rdb.Get(ctx, iter.Val()).Result()
 		fmt.Println(value, hash, value == hash)
