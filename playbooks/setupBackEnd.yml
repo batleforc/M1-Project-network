@@ -50,7 +50,7 @@
   tasks:
     - name: "Copy backend"
       copy:
-        src: ../getHash/Api
+        src: ../getHash/API
         dest: /usr/local/network/
         mode: 0755
         remote_src: false
