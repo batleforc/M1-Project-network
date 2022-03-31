@@ -21,12 +21,12 @@ import (
 )
 
 const (
-	sftpUser      = "tpuser"
+	sftpUser      = "sftp"
 	sftpPass      = "tpuser"
 	sftpHost      = "10.8.1.1"
 	sftpPort      = "22"
 	distantFolder = "/use"
-	backupFolder  = "/usr/local/network/bck"
+	backupFolder  = "./bck"
 	redisIP       = sftpHost + ":6379"
 )
 
@@ -49,7 +49,7 @@ func VerifyFile() bool {
 	host := parsedUrl.Host
 
 	// Get hostkey
-	hostKey := getHostKey(host)
+	// hostKey := getHostKey(host)
 
 	log.Printf("Connecting to %s ...\n", host)
 
@@ -75,8 +75,8 @@ func VerifyFile() bool {
 		// },
 
 		// Uncomment to ignore host key check
-		// HostKeyCallback: ssh.InsecureIgnoreHostKey(),
-		HostKeyCallback: ssh.FixedHostKey(hostKey),
+		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+		// HostKeyCallback: ssh.FixedHostKey(hostKey),
 		// HostKeyCallback: func(hostname string, remote net.Addr, key ssh.PublicKey) error {
 		//  return nil
 		// },

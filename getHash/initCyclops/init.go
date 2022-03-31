@@ -110,8 +110,8 @@ func InitFile() {
 	app.Drop(redisIP)
 
 	for _, file := range theFiles {
-		localfile := backupFolder + file.Name
-		remoteFile := distantFolder + file.Name
+		localfile := backupFolder + "/" + file.Name
+		remoteFile := distantFolder + "/" + file.Name
 		hash, err := backupFile(*sc, localfile, remoteFile)
 		if err != nil {
 			log.Fatalf("failed to backup file in %s: %v", distantFolder, err)
