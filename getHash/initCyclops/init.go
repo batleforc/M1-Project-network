@@ -26,7 +26,7 @@ const (
 	sftpPass      = "tpuser"
 	sftpHost      = "10.8.1.1"
 	sftpPort      = "22"
-	distantFolder = "/use"
+	distantFolder = "/usr/local/network/use"
 	backupFolder  = "/usr/local/network/bck"
 	redisIP       = sftpHost + ":6379"
 )
