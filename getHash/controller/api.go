@@ -77,9 +77,10 @@ func hashFileExist(file *os.File) bool {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("%x", hash.Sum(nil))
+	x := fmt.Sprintf("%x", hash.Sum(nil))
+	fmt.Printf("%s", x)
 
-	return app.HashExist(string(hash.Sum(nil)), redisIP)
+	return app.HashExist(x, redisIP)
 }
 
 func removeFile(file string) {

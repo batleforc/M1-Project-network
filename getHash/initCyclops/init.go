@@ -218,7 +218,7 @@ func backupFile(sc sftp.Client, localFile, remoteFile string) (hash string, err 
 	}
 
 	x:= fmt.Sprintf("%x", hashObj.Sum(nil))
-	fmt.Printf("%x", x)
+	fmt.Printf("%s", x)
 
 	return x, nil
 }
