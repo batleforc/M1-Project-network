@@ -219,8 +219,9 @@ func backupFile(sc sftp.Client, localFile, remoteFile string) (hash string, err 
 	log.Printf("%d bytes copied", bytes)
 
 	hashObj := sha256.New()
+	hashObj.Write(content)
 
-	x := fmt.Sprintf("%x", hashObj.Sum(content))
+	x := fmt.Sprintf("%x", hashObj.Sum(nil))
 	fmt.Printf("%s", x)
 
 	return x, nil
