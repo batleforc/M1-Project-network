@@ -120,10 +120,10 @@ func VerifyFile() bool {
 
 		if _, err := checkFile(*sc, filePath); err != nil {
 			// Upload local
-			log.Printf("%19s %12s %s %s : %s", theFile.ModTime, theFile.Size, theFile.Name, "NOK", err)
+			log.Printf("%19s %12s %s %s : %s", theFile.ModTime, theFile.Size, filePath, "NOK", err)
 			noError = false
 		} else {
-			log.Printf("%19s %12s %s %s", theFile.ModTime, theFile.Size, theFile.Name, "OK")
+			log.Printf("%19s %12s %s %s", theFile.ModTime, theFile.Size, filePath, "OK")
 		}
 	}
 
