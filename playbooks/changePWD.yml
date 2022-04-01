@@ -1,0 +1,8 @@
+- hosts: "ChangePWD"
+  name: "Change user pwd"
+  tasks:
+    - name: "Change user Password"
+      user:
+        name: "tpuser"
+        update_password: always
+        password: "{{ansible_newPWD | password_hash('sha512')}}"
