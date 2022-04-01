@@ -3,7 +3,7 @@
 !include <office/Servers/database_server>
 nwdiag {
   network VmWare{
-    address = "10.192.X.X"
+    address = "10.192.X.X/16"
 
     Daisy[description = "<&person*4.5>\n Daisy"];
     Picsou[description = "<&person*4.5>\n Picsou"];
@@ -15,10 +15,10 @@ nwdiag {
   network Boa {
       address = "192.168.122.x/24"
       color = "palegreen"
-
+      Boa;
       PeauRouge [address = "192.168.122.114:enp1s0",description = "<$application_server>\n PeauRouge"];
-      Aaron [address = "192.168.122.108:enp1s0", shape= cloud];
-      Cyclope [address = "192.168.122.128:enp1s0", description = "<$database_server>\n Cyclope"];
+      Aaron [address = "192.168.122.108:enp1s0"];
+      Cyclope [address = "192.168.122.128:enp1s0"];
   }
   network P1 {
       address = "10.8.0.x/24"
@@ -29,15 +29,15 @@ nwdiag {
   network P2 {
       address = "10.8.1.x/24"
 
-      Cyclope [address = "10.8.1.1:enp10s0"];
-      Aaron [address = "10.8.1.2:enp10s0"];
+      Cyclope [address = "10.8.1.1:enp10s0", description = "<$database_server>\n Cyclope"];
+      Aaron [address = "10.8.1.2:enp10s0", shape= cloud];
   }
   network VPN{
     address = "10.8.3.x/24"
     color = "Cyan"
 
-    Cyclope [address = "10.8.3.1"];
-    PeauRouge [address = "10.8.3.2"];
+    Cyclope [address = "10.8.3.1:Tun0"];
+    PeauRouge [address = "10.8.3.2:Tun0"];
   }
 }
 

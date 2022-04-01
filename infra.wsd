@@ -24,8 +24,9 @@ folder System{
     ]
   }
   node Cyclope{
-    node DB
+    node Redis
     node OvpnTunnel2
+    node Sftp
     cloud noteCyclop #YellowGreen[
       VM3
       BDD
@@ -51,7 +52,8 @@ Daisy <--> https
 PeauRouge <-[#Black]-> Router : Bridge to cyclope [BLUE]
 Router <-[#Black]-> Cyclope : Bridge to PeauRouge [BLUE]
 
-IntegrityChecker <--> DB : Minute check
+IntegrityChecker <--> Redis : Minute check
+IntegrityChecker <--> Sftp : Minute check
 
 OvpnTunnel <.[#Blue]..> OvpnTunnel2 : Secured Link through Router
 
@@ -62,6 +64,6 @@ PKI -[#Green]-> OvpnTunnel2 : Certificate
 
 https <--> Backend
 
-Backend <..[#Blue].> DB : Validate Degree through Router
+Backend <..[#Blue].> Redis : Validate Degree through Router
 
 @enduml
