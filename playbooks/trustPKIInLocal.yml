@@ -5,11 +5,11 @@
     - name: "Get Ca cert on host"
       fetch:
         src: /root/pki/certificats/ca.crt
-        dest: ../pki/ca.crt
+        dest: ../Pki/ca.crt
         flat: yes
     - name: "Copy Ca cert on host"
       copy:
-        src: ../pki/ca.crt
+        src: ../Pki/ca.crt
         dest: /usr/local/share/ca-certificates/ca.crt
         mode: 0755
         remote_src: false
