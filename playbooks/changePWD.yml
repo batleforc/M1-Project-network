@@ -6,4 +6,4 @@
       user:
         name: "tpuser"
         update_password: always
-        password: "{{ansible_newPWD | password_hash('sha512')}}"
+        password: "{{ansible_newPWD | string | password_hash('sha512')}}"

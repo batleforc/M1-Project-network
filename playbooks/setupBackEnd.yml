@@ -53,17 +53,21 @@
         src: ../getHash/API
         dest: /usr/local/network/
         mode: 0755
+        owner: tpuser
         remote_src: false
     - name: "Copy index"
       copy:
         src: ../getHash/static
         dest: /usr/local/network/
         mode: 0755
+        owner: tpuser
         remote_src: false
     - name: "Create temp folder"
       file:
         path: /usr/local/network/temp
         state: directory
+        owner: tpuser
+        mode: 0655
     - name: "Start backend with screen"
       command: "screen -d -m -S getHash /usr/local/network/API -api"
 - hosts: "peaurouge"

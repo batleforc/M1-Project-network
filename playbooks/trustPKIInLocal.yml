@@ -1,0 +1,17 @@
+- hosts: "aaron"
+  become: true
+  name: "trust CA cert on host"
+  tasks:
+    - name: "Get Ca cert on host"
+      fetch:
+        src: /root/pki/certificats/ca.crt
+        dest: ../pki/ca.crt
+        flat: yes
+    - name: "Copy Ca cert on host"
+      copy:
+        src: ../pki/ca.crt
+        dest: /usr/local/share/ca-certificates/ca.crt
+        mode: 0755
+        remote_src: false
+    - name: "Update CA cert on host"
+      shell: "update-ca-certificates"
