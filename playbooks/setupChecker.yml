@@ -2,7 +2,7 @@
   become: true
   name: "Copy Checker File on aaron"
   tasks:
-    - name: "Crete getHAsh folder"
+    - name: "Create getHAsh folder"
       file:
         path: /usr/local/network/bck
         mode: 0755

@@ -67,7 +67,7 @@
         path: /usr/local/network/temp
         state: directory
         owner: tpuser
-        mode: 0655
+        mode: 0654
     - name: "Start backend with screen"
       command: "screen -d -m -S getHash /usr/local/network/API -api"
 - hosts: "peaurouge"

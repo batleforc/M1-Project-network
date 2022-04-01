@@ -11,16 +11,6 @@
   tasks:
     - name: "Generate OpenVpn certificate"
       shell: "sudo openvpn --genkey --secret /etc/openvpn/ta.key"
-- hosts: localhost
-  name: Change ownership of /etc/openvpn/ta.key
-  become: true
-  tasks:
-    - name: "Change ownership of /etc/openvpn/ta.key"
-      file:
-        path: /etc/openvpn/ta.key
-        owner: tpuser
-        group: tpuser
-        mode: 0600
 - hosts: "VPN"
   name: "Copy certificate to PeauRouge and Cyclope"
   become: true

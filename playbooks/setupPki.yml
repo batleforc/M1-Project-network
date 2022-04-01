@@ -6,18 +6,22 @@
       file:
         path: /root/pki
         state: directory
+        mode: 0640
     - name: "Create pki configuration directory"
       file:
         path: /root/pki/config
         state: directory
+        mode: 0640
     - name: "Create pki Certificates directory"
       file:
         path: /root/pki/certificats
         state: directory
+        mode: 0640
     - name: "Create pki db"
       file:
         path: /root/pki/db/ca.db.certs
         state: directory
+        mode: 0640
     - name: "Init pki Db"
       shell: "echo '01'> /root/pki/db/ca.db.serial"
     - name: "Init cert index"
@@ -40,19 +44,3 @@
       shell: "cd /root/pki && sudo openssl x509 -req -days 3000 -in certificats/ca.req -signkey certificats/ca.key -out certificats/ca.crt"
     - name: "Generate ca.der in certificats"
       shell: "cd /root/pki && sudo openssl x509 -in certificats/ca.crt -out certificats/ca.der -outform DER"
-- hosts: "aaron"
-  become: true
-  name: "Generate Client"
-  tasks:
-    - name: "Copy Client.config in config from host"
-      ansible.builtin.copy:
-        src: ../Pki/Client.config
-        dest: /root/pki/config/client.config
-        mode: 0640
-        remote_src: false
-    - name: "Generate key in certificats"
-      shell: "cd /root/pki && openssl genrsa -out certificats/client.key"
-    - name: "Generate key csr in certificats"
-      shell: "cd /root/pki && openssl req -new -key certificats/client.key -out certificats/client.csr -config config/client.config"
-    - name: "Sign csr in certificats"
-      shell: "cd /root/pki && openssl ca -batch -config config/ca.config -days 3650 -notext -md sha256 -in certificats/client.csr -out certificats/client.crt"
