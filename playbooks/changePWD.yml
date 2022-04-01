@@ -2,6 +2,7 @@
   name: "Change user pwd"
   tasks:
     - name: "Change user Password"
+      become: true
       user:
         name: "tpuser"
         update_password: always
