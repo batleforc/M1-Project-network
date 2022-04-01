@@ -1,0 +1,9 @@
+- hosts: "CutNetwork"
+  name: "Disable enp1s0"
+  become: true
+  tasks:
+    - name: "Ping distant"
+      ping:
+    - name: "Disable enp1s0"
+      command: "sudo ip link set enp1s0 down"
+      ignore_errors: true
